@@ -12,7 +12,7 @@ import { Loading } from './components/Loading';
 import './App.css';
 
 
-const API_KEY = '8093c6b17bc8ebe0e02445c86a54365c';
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
