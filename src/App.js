@@ -67,11 +67,11 @@ function App() {
   }
 
   const changeTemperature = (value) => {
-    return (kindTemp === 'c') ? (value / 10).toFixed(0) : ((value / 10) * 1.8 + 32).toFixed(0)
+    return (kindTemp === 'c') ? `${ (value / 10).toFixed(0) } °C`: `${ ((value / 10) * 1.8 + 32).toFixed(0) } °F`
   }
   
   return (
-    <div className="mt-4">
+    <div className="mt-4 text-white">
       <Container >
         <Row>
           <Col className="margin-large">

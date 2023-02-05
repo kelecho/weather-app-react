@@ -9,7 +9,7 @@ export const SearchForm = ( { setCity } ) => {
 
   
   return (
-    <Container className="">
+    <Container>
       <h2>Search by City</h2>
       <Form className="grilla-search-form margin-large" >
           <Typeahead 

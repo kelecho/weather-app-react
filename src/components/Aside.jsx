@@ -20,7 +20,7 @@ export const Aside = ( { clouds, weather, name, temperature, changeTemperature }
           </Col>
           <Col className='text-right'>
             <br />
-            <Card.Subtitle className="mb-2 text-muted"><h1>{ changeTemperature( temperature ) } °C</h1></Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted"><h1>{ changeTemperature( temperature ) }</h1></Card.Subtitle>
           </Col>
         </Row>
         

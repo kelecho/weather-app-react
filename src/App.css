@@ -35,3 +35,7 @@ h1, h2{
 .grilla-search-form{
   display: grid;
 }
+
+.text-white{
+  color: white;
+}

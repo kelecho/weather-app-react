@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col, Card, Container, ProgressBar } from 'react-bootstrap'
 import { ArrowRight, Eye, Moisture, Wind } from 'react-bootstrap-icons'
+import { CardCustom } from './CardCustom'
 
 export const Metrics = ( { humidity, visibility, wind, pressure } ) => {
   return (
@@ -9,60 +10,42 @@ export const Metrics = ( { humidity, visibility, wind, pressure } ) => {
         <Row>
             <Col>
                 <Col>
-                    <Card className='margin-large'>
-                        <Card.Body>
-                            <Card.Title>
-                                <ArrowRight color="royalblue" size={20} />
-                                Air Presure
-                            </Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{ pressure } mb</Card.Subtitle>
-                        </Card.Body>
-                    </Card>
+                    <CardCustom title={ 'Air Presure' }
+                                icon={ <ArrowRight color="royalblue" size={20} /> }
+                                content={ `${ pressure } mb` }
+                                />
                 </Col>
                 <Col>
-                    <Card className='margin-large'>
-                        <Card.Body>
-                            <Card.Title>
-                                <Moisture color="royalblue" size={20} />   
-                                Humidity
-                            </Card.Title>
-                            <Row>
-                                <Col sm={3}>
-                                    <Card.Subtitle className="mb-2 text-muted">{ humidity } %</Card.Subtitle>
-                                </Col>
-                                <Col sm={9}>
-                                    <ProgressBar animated now={ humidity } />
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                    <CardCustom title={ 'Humidity' }
+                                icon={ <Moisture color="royalblue" size={20} /> }
+                                content={ 
+                                        <Row>
+                                            <Col sm={3}>
+                                                <Card.Subtitle className="mb-2">{ humidity } %</Card.Subtitle>
+                                            </Col>
+                                            <Col sm={9}>
+                                                <ProgressBar animated now={ humidity } />
+                                            </Col>
+                                        </Row> 
+                                        }
+                                />
                 </Col>
             </Col>
             <Col>
                 <Col>
-                    <Card className='margin-large'>
-                        <Card.Body>
-                            <Card.Title>
-                                <Eye color="royalblue" size={20} />
-                                Visibility
-                            </Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{ visibility/10 } meters</Card.Subtitle>
-                        </Card.Body>
-                    </Card>
+                    <CardCustom title={ 'Visibility' }
+                                icon={ <Eye color="royalblue" size={20} /> }
+                                content={ `${ visibility/10 } meters` }
+                                />
                 </Col>
                 <Col >
-                    <Card className='margin-large'>
-                        <Card.Body>
-                            <Card.Title>
-                                <Wind color="royalblue" size={20} />
-                                Wind Status</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{ wind } km/h</Card.Subtitle>
-                        </Card.Body>
-                    </Card>
+                    <CardCustom title={ 'Wind Status' }
+                                icon={ <Wind color="royalblue" size={20} /> }
+                                content={ `${ wind } km/h` }
+                                />
                 </Col>
             </Col>
         </Row>
     </Container>
-    
   )
 }
