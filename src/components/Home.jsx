@@ -32,6 +32,7 @@ function Home() {
         if (response.ok) {
           const data = await response.json();
           setInfo(data)
+          console.log(data);
           setError(null);
           setIsLoading(false);
           
@@ -79,6 +80,7 @@ function Home() {
                     weather = { info.weather } 
                     name={ info.name } 
                     temperature={ info.main.temp }
+                    icon={ info.weather[0].icon }
                     changeTemperature={ changeTemperature } 
             />
           </Col>
