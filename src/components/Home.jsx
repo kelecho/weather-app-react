@@ -10,66 +10,61 @@ import { Pronostic } from './Pronostic';
 import { Metrics } from './Metrics';
 import { Loading } from './Loading';
 import '../App.css';
+import { ErrorPage } from './ErrorPage';
 
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [info, setInfo] = useState(null);
   const [city, setCity] = useState('Asuncion')
   const [kindTemp, setKindTemp] = useState('c');
+  const [httpStatusCode, setHttpStatusCode] = useState();
+  const [error, setError] = useState();
 
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    setCity(e.target.city.value);
+  }
   
   useEffect(() => {
     
-    const fetchData = async ( city = 'Asuncion' ) => {
+    const fetchData = async ( ) => {
       try {
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
         );
         if (response.ok) {
           const data = await response.json();
-          setInfo(data)
-          console.log(data);
-          setError(null);
-          setIsLoading(false);
           
+          setInfo(data);
+          console.log(data);
+          console.log(response.status)
         } else {
-          setError("Hubo un error al obtener la informacion");
+          setHttpStatusCode(response.status);
+          setError('Ciudad no valida')
         }
       } catch (error) {
-        setError("No pudimos hacer la solicitud para obtener la informacion");
+        console.log("No pudimos hacer la solicitud para obtener la informacion");
       }
     }
     fetchData( city );
     
-  }, [city, isLoading]);
+  }, [city]);
 
 
-
-  const fetchData = () => {
-    setIsLoading(true);
-  };
-
-
-  if (isLoading) 
-    return (<Loading />);
-  
-
-  if (error) { // ⬅️ mostramos el error (si es que existe)
-    return (
-      <div className="App text-center">
-        <h1>{error}</h1>
-        <button onClick={ fetchData( ) }>Volver a intentarlo</button>
-      </div>
-    );
-  }
 
   const changeTemperature = (value) => {
-    return (kindTemp === 'c') ? `${ (value / 10).toFixed(0) } °C`: `${ ((value / 10) * 1.8 + 32).toFixed(0) } °F`
+    return (kindTemp === 'c') ? `${ value.toFixed(1) } °C`: `${ (value  * 1.8 + 32).toFixed(1) } °F`
   }
+
+  if (!info) return <Loading />
+
+  if (httpStatusCode === 404) {
+    return <ErrorPage value={ error }/>
+  }
+
   
   return (
     <div className="mt-4 text-white">
@@ -88,7 +83,7 @@ function Home() {
           <Col>
             <Row className="margin-large">
               <Col>
-                <SearchForm setCity = { setCity } />
+                <SearchForm handleOnSubmit = { handleOnSubmit } />
               </Col>  
             </Row>
             <Row className="margin-large">

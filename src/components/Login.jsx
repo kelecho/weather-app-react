@@ -26,8 +26,8 @@ export const Login = () => {
         <Card.Body>
             <Card.Title className='text-center'>
               <CloudSun color="royalblue" size={150} />
-              <br />
-              <br />
+            </Card.Title>
+            <Card.Title className='text-center'>
               Log In
             </Card.Title>
               {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}

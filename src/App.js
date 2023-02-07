@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Error } from "./components/Error";
+import { ErrorPage } from "./components/ErrorPage";
 import Home from "./components/Home";
 import { Login } from "./components/Login";
 
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/not_found" element={<Error />} />
+        <Route path="/not_found" element={<ErrorPage />} />
       </Routes>      
     </>
   )

@@ -1,14 +1,14 @@
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
 
-export const Error = () => {
+export const ErrorPage = ( value = 'Credential Invalid!' ) => {
 
   return (
     <>
       <Alert show={true} variant="danger">
         <Alert.Heading>Error ?!</Alert.Heading>
         <p>
-            Credential Invalid!
+            { value }
         </p>
         <hr />
         <div className="d-flex justify-content-end">
